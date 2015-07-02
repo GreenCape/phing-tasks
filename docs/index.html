@@ -1,0 +1,772 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>GreenCape Extensions to Phing</title>
+		<link rel="stylesheet" type="text/css" href="css/book.css">
+	</head>
+		<body>
+		<div id="top" class="book">
+			<h1 class="title"><a name="app.greencape"></a>Addendum GC. GreenCape Extensions</h1>
+
+			<p>This addendum contains a reference of all GreenCape extensions to Phing.</p>
+
+			<p>This reference lists the tasks alphabetically by the name of the classes that implement
+			the tasks. So if you are searching for the reference to the <code class="literal">&lt;joomla-download&gt;</code>
+			tag, for example, you will want to look at the reference of
+			<code class="literal">JoomlaDownloadTask</code>.</p>
+
+			<dl class="toc">
+				<dt><span xmlns:d="http://docbook.org/ns/docbook" class="appendix"><a href="#">GC. GreenCape Extensions</a></span></dt>
+				<dd><dl><ul><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#CombineCoverageTask">GC.1 CombineCoverageTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#DockerDefTask">GC.2 DockerDefTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#DockerListTask">GC.3 DockerListTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#FormatInitFileTask">GC.4 FormatInitFileTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#HelpTask">GC.5 HelpTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#JoomlaDownloadTask">GC.6 JoomlaDownloadTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#JoomlaVersionsTask">GC.7 JoomlaVersionsTask</a></span></dt><dt><span xmlns:d="http://docbook.org/ns/docbook" class="sect1"><a href="#VersionMatchTask">GC.8 VersionMatchTask</a></span></dt></ul></dl></dd>
+			</dl>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="CombineCoverageTask"></a>GC.1 CombineCoverageTask</h2></div>
+                </div>
+            </div>
+
+            <p>Aggregate all PHP code coverage reports (usually <code class="literal">*.cov</code>) files from a directory and create
+                one or more reports.</p>
+            <p>The files to aggregate are defined with a <code class="literal">fileset</code>.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.1.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">pattern</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>A path prefix to be replaced.</td>
+                                <td>n/a</td>
+                                <td>Only if <code class="literal">replace</code> is specified.</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">replace</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The path to replace <code class="literal">pattern</code>.</td>
+                                <td>n/a</td>
+                                <td>Only if <code class="literal">pattern</code> is specified.</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">haltonerror</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Don't continue processing if errors occur.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">clover</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in Clover XML format in this file.</td>
+                                <td>n/a</td>
+                                <td rowspan="5">One or more of<br />- <code class="literal">clover</code>, <br />- <code class="literal">crap4j</code>,
+                                    <br />- <code class="literal">html</code>, <br />- <code class="literal">php</code>, or <br />- <code class="literal">text</code> <br />is required.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">crap4j</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in Crap4J XML format in this file.</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">html</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in HTML format in this directory.</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">php</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Export PHP_CodeCoverage object to file.</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">text</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in text format in this file.</td>
+                                <td>n/a</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.1.1 Example</h3></div>
+                    </div>
+                </div>
+
+                <pre class="programlisting">&lt;!-- Generate an HTML report from the coverage logs in <code class="literal">build/logs</code>. --&gt;
+&lt;!-- All file paths are mapped from <code class="literal">/var/www/html/</code> to <code class="literal">${source}/</code>.  --&gt;
+&lt;combine-coverage
+    pattern="/var/www/html/" replace="${source}/"
+    html="build/reports/coverage"&gt;
+    &lt;fileset dir="build/logs"&gt;
+        &lt;include name="**/*.cov"/&gt;
+    &lt;/fileset&gt;
+&lt;/combine-coverage&gt;
+</pre>
+            </div>
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.1.2 Supported Nested Tags</h3></div>
+                    </div>
+                </div>
+
+                <div class="itemizedlist">
+                    <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                            <p><code class="literal"><a class="link" href="https://www.phing.info/docs/guide/current/FileSet.html" title="D.3 FileSet">fileset</a></code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="DockerDefTask"></a>GC.2 DockerDefTask</h2></div>
+                </div>
+            </div>
+
+            <p>Get a comma separated list of all servers defined in the <code class="literal">docker-compose</code> (formerly called <code class="literal">fig</code>)
+                configuration file</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.2.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">dir</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The directory containing the Docker-Compose configuration file.</td>
+                                <td>The current directory</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">returnProperty</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Property name to set return value to.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">override</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Whether to force override of existing value.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.2.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">&lt;!-- Get a list of all container definitions --&gt;
+&lt;docker-def dir="${dirs.docker}" returnProperty="containers.defined"/&gt;
+&lt;echo message="Defined servers: ${containers.defined}"/&gt;
+&lt;!-- Result: Defined servers: apache,nginx,proxy,php,mysql,pgsql --&gt;
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="DockerListTask"></a>GC.3 DockerListTask</h2></div>
+                </div>
+            </div>
+
+            <p>Get a comma separated list of all Docker containers matching the conditions, i.e.,</p>
+            <ul>
+                <li>name matches the pattern given in <code class="literal">container</code></li>
+                <li>state equals the value given in <code class="literal">state</code></li>
+            </ul>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.3.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">dir</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The directory containing the Docker-Compose configuration file.</td>
+                                <td>The current directory</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">returnProperty</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Property name to set return value to.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">override</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Whether to force override of existing value.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">container</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>A pattern for the container name. Use <code class="literal">?</code> and <code class="literal">*</code> as wildcards.</td>
+                                <td>'*'</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">state</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Only containers matching this state value will be included.</td>
+                                <td>n/a</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.3.1 Examples</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">&lt;!-- Get a list of all existing containers, regardless of state --&gt;
+&lt;docker-list dir="${dirs.docker}" returnProperty="containers"/&gt;
+
+&lt;!-- Get a list of all running containers --&gt;
+&lt;docker-list dir="/home/develop" state="up" returnProperty="containers"/&gt;
+
+&lt;!-- Get a list of all running containers having 'sql' in their name --&gt;
+&lt;docker-list container="*sql*" state="up" returnProperty="containers"/&gt;
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="FormatInitFileTask"></a>GC.4 FormatInitFileTask</h2></div>
+                </div>
+            </div>
+
+            <p>The MySQL server supports initialization with an SQL file at startup.
+                This file has a lot of restrictions
+                (see <a href="https://dev.mysql.com/doc/refman/5.0/en/server-options.html#option_mysqld_init-file">MySQL manual</a>):
+            </p>
+            <ul>
+                <li>statements must not contain more than 20,000 characters</li>
+                <li>comments are not allowed</li>
+                <li>empty lines are not allowed</li>
+            </ul>
+
+            <p>This task re-formats an SQL dump to follow the rules. The input file will be replaced.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.4.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">file</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The file to be reformatted.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">level</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Control the level at which messages are reported. One of
+                                    <code class="literal">error</code>, <code class="literal">warning</code>,
+                                    <code class="literal">info</code>, <code class="literal">verbose</code>,
+                                    <code class="literal">debug</code>.</td>
+                                <td>'<code class="literal">info</code>'</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.4.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">
+&lt;!-- Reformat a MySQL import file --&gt;
+&lt;format-initfile file="import.sql"/&gt;
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="HelpTask"></a>GC.5 HelpTask</h2></div>
+                </div>
+            </div>
+
+            <p>The HelpTask provides additional information to <code class="literal">phing -h</code> or
+                <code class="literal">phing list</code>. It recursively parses the <code class="literal">build.xml</code>
+                file and all included build files. The output will show the description, the dependencies, and the build
+                file containing the target for all available targets.
+            </p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.5.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">verbose</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>If <code class="literal">true</code>, hidden targets will be included.</td>
+                                <td>false</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.5.1 Example</h3></div>
+                    </div>
+                </div>
+
+                <pre class="programlisting">
+&lt;!-- Make help available on the command line --&gt;
+&lt;help/&gt;
+</pre>
+
+                <pre class="programlisting">
+$ phing help
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="JoomlaDownloadTask"></a>GC.6 JoomlaDownloadTask</h2></div>
+                </div>
+            </div>
+
+            <p>Downloads the specified Joomla! version. The tarball is stored in a cache for reuse.</p>
+
+            <p>The version can be specified as a (partial) version number or a branch of the official Joomla!
+                repository.</p>
+
+            <p>This task expects a <code class="literal">versions.json</code> file containing information about where to find
+                the packages on GitHub. That file is created using the <a href="#JoomlaVersionsTask"><code class="literal">JoomlaVersionsTask</code></a>.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.6.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">version</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The requested Joomla! version.</td>
+                                <td>'<code class="literal">latest</code>'</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">versionFile</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The file with information about tarball locations.</td>
+                                <td>'<code class="literal">versions.json</code>'</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">cachePath</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The directory to store the tarball.</td>
+                                <td>'<code class="literal">build</code>'</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">returnProperty</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Property name to set return value to.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">override</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Whether to force override of existing value.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.6.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">
+&lt;!-- Get available Joomla! versions --&gt;
+&lt;joomla-versions versionFile="cache/versions.json"/&gt;
+
+&lt;!-- Download the latest stable 3.x.x version of Joomla! --&gt;
+&lt;joomla-download
+    version="3"
+    versionFile="cache/versions.json"
+    cachePath="cache"
+    returnProperty="tarball"/&gt;
+
+&lt;!-- Unpack the tarball to the web root --&gt;
+&lt;untar todir="/var/www/html" file="${tarball}"/&gt;
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="JoomlaVersionsTask"></a>GC.7 JoomlaVersionsTask</h2></div>
+                </div>
+            </div>
+
+            <p>Retrieves a list of available Joomla! versions from the following GitHub repositories:</p>
+            <ol>
+                <li>joomla/joomla-cms</li>
+                <li>greencape/joomla-legacy</li>
+            </ol>
+
+            <p>The GreenCape repository provides old versions not present in the official Joomla!
+                repository.</p>
+
+            <p>The <code class="literal">versions.json</code> file containing information about where to find
+                the packages on GitHub is needed by the <a href="#JoomlaDownloadTask"><code class="literal">JoomlaDownloadTask</code></a>.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.7.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">versionFile</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The file with information about tarball locations.</td>
+                                <td>'<code class="literal">versions.json</code>'</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.7.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">
+&lt;!-- Get available Joomla! versions --&gt;
+&lt;joomla-versions versionFile="cache/versions.json"/&gt;
+
+&lt;!-- Download the latest stable 3.x.x version of Joomla! --&gt;
+&lt;joomla-download
+    version="3"
+    versionFile="cache/versions.json"
+    cachePath="cache"
+    returnProperty="tarball"/&gt;
+
+&lt;!-- Unpack the tarball to the web root --&gt;
+&lt;untar todir="/var/www/html" file="${tarball}"/&gt;
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+							
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="VersionMatchTask"></a>GC.8 VersionMatchTask</h2></div>
+                </div>
+            </div>
+
+            <p>Finds the file best matching the provided version information.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table GC.8.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">version</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The requested version.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">pattern</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>A RegExp matching the files to choose from. The version part of the filename must
+                                    be replaced with <code class="literal">'(.*)'</code>.
+                                </td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">path</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The location of the files to choose from.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">returnProperty</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Property name to set return value to.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">override</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Whether to force override of existing value.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">GC.8.1 Example</h3></div>
+                    </div>
+                </div>
+
+                <pre class="programlisting">
+&lt;target name="find-sql"&gt;
+    &lt;version-match dir="sql-data" pattern="joomla-(.*).sql" version="3.4.1" returnProperty="testdata"/&gt;
+    &lt;fail unless="testdata" message="No test data found for Joomla! ${version}"/&gt;
+    &lt;echo message="${testdata}"/&gt;
+&lt;/target&gt;
+</pre>
+                <pre class="programlisting">
+$ ls sql-data
+joomla-1.0.sql  joomla-1.5.sql  joomla-1.6.sql  joomla-2.5.sql  joomla-3.sql
+
+$ phing find-sql
+...
+     [echo] joomla-3.sql
+
+BUILD FINISHED
+...
+</pre>
+            </div>
+        </div>
+    				<a href="#top" style="float: right;">top</a>
+					</div>
+	</body>
+</html>

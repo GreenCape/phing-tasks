@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>@CHAPTER@ JoomlaVersionsTask</title>
+        <link rel="stylesheet" type="text/css" href="../css/book.css">
+    </head>
+    <body>
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="JoomlaVersionsTask"></a>@CHAPTER@ JoomlaVersionsTask</h2></div>
+                </div>
+            </div>
+
+            <p>Retrieves a list of available Joomla! versions from the following GitHub repositories:</p>
+            <ol>
+                <li>joomla/joomla-cms</li>
+                <li>greencape/joomla-legacy</li>
+            </ol>
+
+            <p>The GreenCape repository provides old versions not present in the official Joomla!
+                repository.</p>
+
+            <p>The <code class="literal">versions.json</code> file containing information about where to find
+                the packages on GitHub is needed by the <a href="#JoomlaDownloadTask"><code class="literal">JoomlaDownloadTask</code></a>.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table @CHAPTER@.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">versionFile</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The file with information about tarball locations.</td>
+                                <td>'<code class="literal">versions.json</code>'</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">
+&lt;!-- Get available Joomla! versions --&gt;
+&lt;joomla-versions versionFile="cache/versions.json"/&gt;
+
+&lt;!-- Download the latest stable 3.x.x version of Joomla! --&gt;
+&lt;joomla-download
+    version="3"
+    versionFile="cache/versions.json"
+    cachePath="cache"
+    returnProperty="tarball"/&gt;
+
+&lt;!-- Unpack the tarball to the web root --&gt;
+&lt;untar todir="/var/www/html" file="${tarball}"/&gt;
+</pre>
+            </div>
+        </div>
+    </body>
+</html>

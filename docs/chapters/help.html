@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>@CHAPTER@ HelpTask</title>
+        <link rel="stylesheet" type="text/css" href="../css/book.css">
+    </head>
+    <body>
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="HelpTask"></a>@CHAPTER@ HelpTask</h2></div>
+                </div>
+            </div>
+
+            <p>The HelpTask provides additional information to <code class="literal">phing -h</code> or
+                <code class="literal">phing list</code>. It recursively parses the <code class="literal">build.xml</code>
+                file and all included build files. The output will show the description, the dependencies, and the build
+                file containing the target for all available targets.
+            </p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table @CHAPTER@.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">verbose</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>If <code class="literal">true</code>, hidden targets will be included.</td>
+                                <td>false</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.1 Example</h3></div>
+                    </div>
+                </div>
+
+                <pre class="programlisting">
+&lt;!-- Make help available on the command line --&gt;
+&lt;help/&gt;
+</pre>
+
+                <pre class="programlisting">
+$ phing help
+</pre>
+            </div>
+        </div>
+    </body>
+</html>

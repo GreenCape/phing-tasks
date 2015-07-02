@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>@CHAPTER@ CombineCoverageTask</title>
+        <link rel="stylesheet" type="text/css" href="../css/book.css">
+    </head>
+    <body>
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="CombineCoverageTask"></a>@CHAPTER@ CombineCoverageTask</h2></div>
+                </div>
+            </div>
+
+            <p>Aggregate all PHP code coverage reports (usually <code class="literal">*.cov</code>) files from a directory and create
+                one or more reports.</p>
+            <p>The files to aggregate are defined with a <code class="literal">fileset</code>.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table @CHAPTER@.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">pattern</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>A path prefix to be replaced.</td>
+                                <td>n/a</td>
+                                <td>Only if <code class="literal">replace</code> is specified.</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">replace</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The path to replace <code class="literal">pattern</code>.</td>
+                                <td>n/a</td>
+                                <td>Only if <code class="literal">pattern</code> is specified.</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">haltonerror</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Don't continue processing if errors occur.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">clover</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in Clover XML format in this file.</td>
+                                <td>n/a</td>
+                                <td rowspan="5">One or more of<br />- <code class="literal">clover</code>, <br />- <code class="literal">crap4j</code>,
+                                    <br />- <code class="literal">html</code>, <br />- <code class="literal">php</code>, or <br />- <code class="literal">text</code> <br />is required.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">crap4j</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in Crap4J XML format in this file.</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">html</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in HTML format in this directory.</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">php</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Export PHP_CodeCoverage object to file.</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">text</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Generate code coverage report in text format in this file.</td>
+                                <td>n/a</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.1 Example</h3></div>
+                    </div>
+                </div>
+
+                <pre class="programlisting">&lt;!-- Generate an HTML report from the coverage logs in <code class="literal">build/logs</code>. --&gt;
+&lt;!-- All file paths are mapped from <code class="literal">/var/www/html/</code> to <code class="literal">${source}/</code>.  --&gt;
+&lt;combine-coverage
+    pattern="/var/www/html/" replace="${source}/"
+    html="build/reports/coverage"&gt;
+    &lt;fileset dir="build/logs"&gt;
+        &lt;include name="**/*.cov"/&gt;
+    &lt;/fileset&gt;
+&lt;/combine-coverage&gt;
+</pre>
+            </div>
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.2 Supported Nested Tags</h3></div>
+                    </div>
+                </div>
+
+                <div class="itemizedlist">
+                    <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                            <p><code class="literal"><a class="link" href="https://www.phing.info/docs/guide/current/FileSet.html" title="D.3 FileSet">fileset</a></code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

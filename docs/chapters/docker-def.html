@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>@CHAPTER@ DockerDefTask</title>
+        <link rel="stylesheet" type="text/css" href="../css/book.css">
+    </head>
+    <body>
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="DockerDefTask"></a>@CHAPTER@ DockerDefTask</h2></div>
+                </div>
+            </div>
+
+            <p>Get a comma separated list of all servers defined in the <code class="literal">docker-compose</code> (formerly called <code class="literal">fig</code>)
+                configuration file</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table @CHAPTER@.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">dir</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The directory containing the Docker-Compose configuration file.</td>
+                                <td>The current directory</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">returnProperty</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Property name to set return value to.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">override</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Whether to force override of existing value.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">&lt;!-- Get a list of all container definitions --&gt;
+&lt;docker-def dir="${dirs.docker}" returnProperty="containers.defined"/&gt;
+&lt;echo message="Defined servers: ${containers.defined}"/&gt;
+&lt;!-- Result: Defined servers: apache,nginx,proxy,php,mysql,pgsql --&gt;
+</pre>
+            </div>
+        </div>
+    </body>
+</html>

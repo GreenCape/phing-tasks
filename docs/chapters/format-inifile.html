@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>@CHAPTER@ FormatInitFileTask</title>
+        <link rel="stylesheet" type="text/css" href="../css/book.css">
+    </head>
+    <body>
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="FormatInitFileTask"></a>@CHAPTER@ FormatInitFileTask</h2></div>
+                </div>
+            </div>
+
+            <p>The MySQL server supports initialization with an SQL file at startup.
+                This file has a lot of restrictions
+                (see <a href="https://dev.mysql.com/doc/refman/5.0/en/server-options.html#option_mysqld_init-file">MySQL manual</a>):
+            </p>
+            <ul>
+                <li>statements must not contain more than 20,000 characters</li>
+                <li>comments are not allowed</li>
+                <li>empty lines are not allowed</li>
+            </ul>
+
+            <p>This task re-formats an SQL dump to follow the rules. The input file will be replaced.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table @CHAPTER@.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">file</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The file to be reformatted.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">level</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Control the level at which messages are reported. One of
+                                    <code class="literal">error</code>, <code class="literal">warning</code>,
+                                    <code class="literal">info</code>, <code class="literal">verbose</code>,
+                                    <code class="literal">debug</code>.</td>
+                                <td>'<code class="literal">info</code>'</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.1 Example</h3></div>
+                    </div>
+                </div>
+
+            <pre class="programlisting">
+&lt;!-- Reformat a MySQL import file --&gt;
+&lt;format-initfile file="import.sql"/&gt;
+</pre>
+            </div>
+        </div>
+    </body>
+</html>

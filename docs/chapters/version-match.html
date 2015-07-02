@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>@CHAPTER@ VersionMatchTask</title>
+        <link rel="stylesheet" type="text/css" href="../css/book.css">
+    </head>
+    <body>
+        <div class="sect1">
+            <div class="titlepage">
+                <div>
+                    <div><h2 class="title" style="clear: both"><a name="VersionMatchTask"></a>@CHAPTER@ VersionMatchTask</h2></div>
+                </div>
+            </div>
+
+            <p>Finds the file best matching the provided version information.</p>
+
+            <div class="table">
+
+                <p class="formal-object-title"><span class="label">Table @CHAPTER@.1:&nbsp;</span><span class="title">Attributes</span></p>
+
+                <div class="table-contents">
+
+                    <table summary="Attributes" border="1">
+                        <colgroup>
+                            <col class="name">
+                            <col class="type">
+                            <col class="description">
+                            <col class="default">
+                            <col class="required">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="literal">version</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The requested version.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">pattern</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>A RegExp matching the files to choose from. The version part of the filename must
+                                    be replaced with <code class="literal">'(.*)'</code>.
+                                </td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">path</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>The location of the files to choose from.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">returnProperty</code></td>
+                                <td><code class="literal">String</code></td>
+                                <td>Property name to set return value to.</td>
+                                <td>n/a</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code class="literal">override</code></td>
+                                <td><code class="literal">Boolean</code></td>
+                                <td>Whether to force override of existing value.</td>
+                                <td>False</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br class="table-break">
+
+            <div class="sect2">
+                <div class="titlepage">
+                    <div>
+                        <div><h3 class="title">@CHAPTER@.1 Example</h3></div>
+                    </div>
+                </div>
+
+                <pre class="programlisting">
+&lt;target name="find-sql"&gt;
+    &lt;version-match dir="sql-data" pattern="joomla-(.*).sql" version="3.4.1" returnProperty="testdata"/&gt;
+    &lt;fail unless="testdata" message="No test data found for Joomla! ${version}"/&gt;
+    &lt;echo message="${testdata}"/&gt;
+&lt;/target&gt;
+</pre>
+                <pre class="programlisting">
+$ ls sql-data
+joomla-1.0.sql  joomla-1.5.sql  joomla-1.6.sql  joomla-2.5.sql  joomla-3.sql
+
+$ phing find-sql
+...
+     [echo] joomla-3.sql
+
+BUILD FINISHED
+...
+</pre>
+            </div>
+        </div>
+    </body>
+</html>
