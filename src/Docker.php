@@ -1,6 +1,8 @@
 <?php
 
-class Docker extends Task
+namespace GreenCape\PhingTasks;
+
+class Docker extends \Task
 {
 	protected $container = '*';
 	protected $containerList = null;
@@ -39,7 +41,7 @@ class Docker extends Task
 	/**
 	 * Run as a task.
 	 *
-	 * @throws BuildException if an error occurs.
+	 * @throws \BuildException if an error occurs.
 	 */
 	public function main()
 	{
@@ -61,7 +63,7 @@ class Docker extends Task
 	 *
 	 * @param array $containers Preselected list of containers
 	 *
-	 * @throws BuildException
+	 * @throws \BuildException
 	 */
 	protected function dockerList($containers)
 	{
@@ -71,7 +73,7 @@ class Docker extends Task
 	/**
 	 * Get a comma separated list of all servers defined in the docker-compose (formerly called fig) configuration file
 	 *
-	 * @throws BuildException
+	 * @throws \BuildException
 	 */
 	protected function dockerDef()
 	{
@@ -92,7 +94,7 @@ class Docker extends Task
 
 		$replace   = array('?' => '.', '*' => '.*?');
 		$container = str_replace(array_keys($replace), array_values($replace), $this->container);
-		$this->log("Searching containers matching '{$this->container}'", Project::MSG_DEBUG);
+		$this->log("Searching containers matching '{$this->container}'", \Project::MSG_DEBUG);
 
 		$this->containerList = array();
 		foreach (explode("\n", `docker-compose ps`) as $line)
@@ -108,7 +110,7 @@ class Docker extends Task
 			}
 		}
 		chdir($oldDir);
-		$this->log(" - Found " . count($this->containerList) . " containers", Project::MSG_DEBUG);
+		$this->log(" - Found " . count($this->containerList) . " containers", \Project::MSG_DEBUG);
 	}
 
 	protected function checkConfigurationFile()
@@ -124,7 +126,7 @@ class Docker extends Task
 		}
 		if (empty($this->configFile))
 		{
-			throw new BuildException("Can't find a suitable configuration file. Are you in the right directory?\n\nSupported filenames: " . implode(', ', $$this->supportedFileNames));
+			throw new \BuildException("Can't find a suitable configuration file. Are you in the right directory?\n\nSupported filenames: " . implode(', ', $$this->supportedFileNames));
 		}
 	}
 

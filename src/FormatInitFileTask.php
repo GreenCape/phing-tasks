@@ -1,9 +1,11 @@
 <?php
 
-class FormatInitFileTask extends Task
+namespace GreenCape\PhingTasks;
+
+class FormatInitFileTask extends \Task
 {
 	private $file;
-	private $level = Project::MSG_DEBUG;
+	private $level = \Project::MSG_DEBUG;
 
 	public function setFile($file)
 	{
@@ -13,11 +15,11 @@ class FormatInitFileTask extends Task
 	public function setLevel($level)
 	{
 		static $levels = array(
-			'info'    => Project::MSG_INFO,
-			'debug'   => Project::MSG_DEBUG,
-			'error'   => Project::MSG_ERR,
-			'verbose' => Project::MSG_VERBOSE,
-			'warning' => Project::MSG_WARN,
+			'info'    => \Project::MSG_INFO,
+			'debug'   => \Project::MSG_DEBUG,
+			'error'   => \Project::MSG_ERR,
+			'verbose' => \Project::MSG_VERBOSE,
+			'warning' => \Project::MSG_WARN,
 		);
 		$this->level = $levels[$level];
 	}
@@ -30,13 +32,13 @@ class FormatInitFileTask extends Task
 		$src = fopen($this->file, 'r');
 		if (!$src)
 		{
-			$this->log("Unable to open {$this->file}", Project::MSG_WARN);
+			$this->log("Unable to open {$this->file}", \Project::MSG_WARN);
 			return 1;
 		}
 		$dst = fopen($tmp, 'w');
 		if (!$dst)
 		{
-			$this->log("Unable to open {$tmp}", Project::MSG_WARN);
+			$this->log("Unable to open {$tmp}", \Project::MSG_WARN);
 			fclose($src);
 			return 1;
 		}
@@ -99,7 +101,7 @@ class FormatInitFileTask extends Task
 			}
 			else
 			{
-				$this->dump("Line not handled:", $line, Project::MSG_WARN);
+				$this->dump("Line not handled:", $line, \Project::MSG_WARN);
 				$buffer = trim("$buffer $line");
 			}
 		}

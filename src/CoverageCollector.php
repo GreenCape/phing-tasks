@@ -1,5 +1,7 @@
 <?php
 
+namespace GreenCape\PhingTasks;
+
 class CoverageCollector
 {
 	private $data = array();
@@ -92,11 +94,11 @@ class CoverageCollector
 	}
 
 	/**
-	 * @return PHP_CodeCoverage
+	 * @return \PHP_CodeCoverage
 	 */
 	public function coverage()
 	{
-		$coverage = new PHP_CodeCoverage;
+		$coverage = new \PHP_CodeCoverage;
 		$coverage->setData($this->data);
 		$coverage->setTests($this->tests);
 		$filter = $coverage->filter();

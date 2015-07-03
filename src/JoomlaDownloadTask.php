@@ -1,6 +1,8 @@
 <?php
 
-class JoomlaDownloadTask extends Task
+namespace GreenCape\PhingTasks;
+
+class JoomlaDownloadTask extends \Task
 {
 	protected $version = 'latest';
 	protected $versionFile = 'versions.json';
@@ -48,7 +50,7 @@ class JoomlaDownloadTask extends Task
 
 		if (file_exists($tarball) && !isset($versions['heads'][$this->version]))
 		{
-			$this->log("$requested: Joomla $this->version is already in cache", Project::MSG_INFO);
+			$this->log("$requested: Joomla $this->version is already in cache", \Project::MSG_INFO);
 
 			return $tarball;
 		}
@@ -64,16 +66,16 @@ class JoomlaDownloadTask extends Task
 		}
 		else
 		{
-			$this->log("$requested: Version is unknown", Project::MSG_ERR);
+			$this->log("$requested: Version is unknown", \Project::MSG_ERR);
 
 			return null;
 		}
 
-		$this->log("$requested: Downloading Joomla $this->version", Project::MSG_INFO);
+		$this->log("$requested: Downloading Joomla $this->version", \Project::MSG_INFO);
 		$bytes = file_put_contents($tarball, fopen($url, 'r'));
 		if ($bytes === false || $bytes == 0)
 		{
-			$this->log("$requested: Failed to download $url", Project::MSG_ERR);
+			$this->log("$requested: Failed to download $url", \Project::MSG_ERR);
 
 			return null;
 		}

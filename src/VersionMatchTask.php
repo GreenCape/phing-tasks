@@ -1,6 +1,8 @@
 <?php
 
-class VersionMatchTask extends Task
+namespace GreenCape\PhingTasks;
+
+class VersionMatchTask extends \Task
 {
 	protected $version;
 	protected $path;

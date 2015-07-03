@@ -1,5 +1,7 @@
 <?php
 
+namespace GreenCape\PhingTasks;
+
 trait ReturnPropertyImplementation
 {
 	/** @var string Name of the property for the return value */
@@ -21,13 +23,13 @@ trait ReturnPropertyImplementation
 	/**
 	 * @param $value
 	 *
-	 * @throws BuildException
+	 * @throws \BuildException
 	 */
 	protected function returnValue($value)
 	{
 		if (empty($this->returnProperty))
 		{
-			throw new BuildException("'returnProperty' must be set for {$this->getTaskName()}.");
+			throw new \BuildException("'returnProperty' must be set for {$this->getTaskName()}.");
 		}
 		if ($this->override)
 		{

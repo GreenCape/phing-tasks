@@ -1,6 +1,8 @@
 <?php
 
-class HelpTask extends Task
+namespace GreenCape\PhingTasks;
+
+class HelpTask extends \Task
 {
 	private $verbose = false;
 

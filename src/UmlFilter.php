@@ -1,6 +1,8 @@
 <?php
 
-class UmlFilter extends Task
+namespace GreenCape\PhingTasks;
+
+class UmlFilter extends \Task
 {
 	protected $file;
 	protected $dir;
@@ -54,18 +56,18 @@ class UmlFilter extends Task
 	{
 		if (empty($this->jar))
 		{
-			throw new BuildException("Please provide location of plantuml.jar");
+			throw new \BuildException("Please provide location of plantuml.jar");
 		}
 
 		if (count($this->fileSets) == 0 && count($this->fileLists) == 0)
 		{
-			throw new BuildException("Need either nested fileset or nested filelist to iterate through");
+			throw new \BuildException("Need either nested fileset or nested filelist to iterate through");
 		}
 	}
 
 	/**
 	 * @return array
-	 * @throws BuildException
+	 * @throws \BuildException
 	 */
 	protected function handleFiles()
 	{

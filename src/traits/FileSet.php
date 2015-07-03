@@ -1,21 +1,23 @@
 <?php
 
+namespace GreenCape\PhingTasks;
+
 trait FileSetImplementation
 {
-	/** @var FileSet[] */
+	/** @var \FileSet[] */
 	protected $fileSets = array();
 
-	/** @var FileList[] */
+	/** @var \FileList[] */
 	protected $fileLists = array();
 
 	/**
-	 * Nested adder, adds a set of files (nested fileset attribute).
+	 * Nested adder, adds a set of files (nested \FileSet attribute).
 	 *
-	 * @param FileSet $fs
+	 * @param \FileSet $fs
 	 *
 	 * @return void
 	 */
-	public function addFileSet(FileSet $fs)
+	public function addFileSet(\FileSet $fs)
 	{
 		$this->fileSets[] = $fs;
 	}
@@ -23,11 +25,11 @@ trait FileSetImplementation
 	/**
 	 * Supports embedded <filelist> element.
 	 *
-	 * @return FileList
+	 * @return \FileList
 	 */
 	public function createFileList()
 	{
-		$num = array_push($this->fileLists, new FileList());
+		$num = array_push($this->fileLists, new \FileList());
 
 		return $this->fileLists[$num - 1];
 	}
@@ -36,7 +38,7 @@ trait FileSetImplementation
 	{
 		if (count($this->fileSets) == 0 && count($this->fileLists) == 0)
 		{
-			throw new BuildException("Need either nested fileset or nested filelist to iterate through");
+			throw new \BuildException("Need either nested fileset or nested filelist to iterate through");
 		}
 
 		$srcFiles = array();
@@ -65,7 +67,7 @@ trait FileSetImplementation
 	{
 		if (count($this->fileSets) == 0 && count($this->fileLists) == 0)
 		{
-			throw new BuildException("Need either list, nested fileset or nested filelist to iterate through");
+			throw new \BuildException("Need either list, nested fileset or nested filelist to iterate through");
 		}
 
 		$srcDirs = array();

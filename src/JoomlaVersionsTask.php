@@ -1,6 +1,8 @@
 <?php
 
-class JoomlaVersionsTask extends Task
+namespace GreenCape\PhingTasks;
+
+class JoomlaVersionsTask extends \Task
 {
 	protected $file = 'versions.json';
 

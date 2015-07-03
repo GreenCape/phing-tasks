@@ -1,8 +1,10 @@
 <?php
 
-class CombineCoverageTask extends Task
+namespace GreenCape\PhingTasks;
+
+class CombineCoverageTask extends \Task
 {
-	/** @var FileSet[] */
+	/** @var \FileSet[] */
 	protected $filesets = array(); // all fileset objects assigned to this task
 
 	/** @var bool */
@@ -87,13 +89,13 @@ class CombineCoverageTask extends Task
 	}
 
 	/**
-	 * Nested creator, creates a FileSet for this task
+	 * Nested creator, creates a \FileSet for this task
 	 *
-	 * @param FileSet $fs Set of files to copy
+	 * @param \FileSet $fs Set of files to copy
 	 *
 	 * @return void
 	 */
-	public function addFileSet(FileSet $fs)
+	public function addFileSet(\FileSet $fs)
 	{
 		$this->filesets[] = $fs;
 	}
@@ -144,13 +146,13 @@ class CombineCoverageTask extends Task
 		return $filenames;
 	}
 
-	private function handleReports(PHP_CodeCoverage $coverage)
+	private function handleReports(\PHP_CodeCoverage $coverage)
 	{
 		if ($this->clover)
 		{
 			$this->log("Generating code coverage report in Clover XML format ...");
 
-			$writer = new PHP_CodeCoverage_Report_Clover;
+			$writer = new \PHP_CodeCoverage_Report_Clover;
 			$writer->process($coverage, $this->clover);
 		}
 
@@ -158,7 +160,7 @@ class CombineCoverageTask extends Task
 		{
 			$this->log("Generating code coverage report in Crap4J XML format...");
 
-			$writer = new PHP_CodeCoverage_Report_Crap4j;
+			$writer = new \PHP_CodeCoverage_Report_Crap4j;
 			$writer->process($coverage, $this->crap4j);
 		}
 
@@ -166,7 +168,7 @@ class CombineCoverageTask extends Task
 		{
 			$this->log("Generating code coverage report in HTML format ...");
 
-			$writer = new PHP_CodeCoverage_Report_HTML;
+			$writer = new \PHP_CodeCoverage_Report_HTML;
 			$writer->process($coverage, $this->html);
 		}
 
@@ -174,13 +176,13 @@ class CombineCoverageTask extends Task
 		{
 			$this->log("Generating code coverage report in PHP format ...");
 
-			$writer = new PHP_CodeCoverage_Report_PHP;
+			$writer = new \PHP_CodeCoverage_Report_PHP;
 			$writer->process($coverage, $this->php);
 		}
 
 		if ($this->text)
 		{
-			$writer = new PHP_CodeCoverage_Report_Text(50, 90, false, false);
+			$writer = new \PHP_CodeCoverage_Report_Text(50, 90, false, false);
 			$writer->process($coverage, $this->text);
 		}
 	}
@@ -209,7 +211,7 @@ class CombineCoverageTask extends Task
 
 		if (!class_exists('PHP_CodeCoverage'))
 		{
-			throw new BuildException("CombineCoverageTask requires PHPUnit to be installed", $this->getLocation());
+			throw new \BuildException("CombineCoverageTask requires PHPUnit to be installed", $this->getLocation());
 		}
 	}
 
@@ -217,17 +219,17 @@ class CombineCoverageTask extends Task
 	 * @param string $message
 	 * @param null   $location
 	 *
-	 * @throws BuildException
+	 * @throws \BuildException
 	 */
 	protected function logError($message, $location = null)
 	{
 		if ($this->haltonerror)
 		{
-			throw new BuildException($message, $location);
+			throw new \BuildException($message, $location);
 		}
 		else
 		{
-			$this->log($message, Project::MSG_ERR);
+			$this->log($message, \Project::MSG_ERR);
 		}
 	}
 }
