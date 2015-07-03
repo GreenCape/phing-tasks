@@ -23,3 +23,22 @@ To import the tasks into your installation, add
 ```
 
 to your `build.xml`.
+
+## Usage
+
+Type
+```
+$ .vendor/bin/phing -l
+```
+
+for the list of available targets, or 
+
+```
+$ .vendor/bin/phing help
+```
+
+to get some additional info.
+
+## Documentation
+
+The documentation is located in the `docs` directory. You can [view the documentation online](http://htmlpreview.github.io/?https://github.com/GreenCape/phing-tasks/master/docs/index.html). 
