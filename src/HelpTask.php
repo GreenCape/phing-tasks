@@ -47,7 +47,7 @@ class HelpTask extends \Task
 			{
 				$target['description'] = '';
 			}
-			if ($target['hidden'] == 'true')
+			if (isset($target['hidden']) && $target['hidden'] == 'true')
 			{
 				$target['description'] = trim($target['description'] . ' (hidden)');
 			}
